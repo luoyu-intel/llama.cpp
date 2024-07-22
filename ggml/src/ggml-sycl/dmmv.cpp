@@ -1114,6 +1114,7 @@ void ggml_sycl_op_dequantize_mul_mat_vec(
     for (int i = 0; i < src1_ncols; i++)
     {
         const dfloat* src1_dfloat_bs = src1_dfloat + i * ne00;
+        const float* src1_ddf_bs = src1_ddf_i + i * ne00;
         float* dst_dd_i_bs = dst_dd_i + i * dst->ne[0];
         switch (src0->type) {
         case GGML_TYPE_Q4_0:
@@ -1132,19 +1133,19 @@ void ggml_sycl_op_dequantize_mul_mat_vec(
             dequantize_mul_mat_vec_q8_0_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_Q2_K:
-            dequantize_mul_mat_vec_q2_K_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
+            dequantize_mul_mat_vec_q2_K_sycl(src0_dd_i, src1_ddf_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_Q3_K:
-            dequantize_mul_mat_vec_q3_K_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
+            dequantize_mul_mat_vec_q3_K_sycl(src0_dd_i, src1_ddf_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_Q4_K:
-            dequantize_mul_mat_vec_q4_K_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
+            dequantize_mul_mat_vec_q4_K_sycl(src0_dd_i, src1_ddf_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_Q5_K:
-            dequantize_mul_mat_vec_q5_K_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
+            dequantize_mul_mat_vec_q5_K_sycl(src0_dd_i, src1_ddf_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_Q6_K:
-            dequantize_mul_mat_vec_q6_K_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
+            dequantize_mul_mat_vec_q6_K_sycl(src0_dd_i, src1_ddf_bs, dst_dd_i_bs, ne00, row_diff, stream);
             break;
         case GGML_TYPE_F16:
             convert_mul_mat_vec_f16_sycl(src0_dd_i, src1_dfloat_bs, dst_dd_i_bs, ne00, row_diff, stream);
