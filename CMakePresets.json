@@ -60,6 +60,8 @@
     { "name": "x64-windows-msvc+static-release", "inherits": [ "base", "reldbg", "static" ] },
 
     { "name": "x64-windows-sycl-debug"  , "inherits": [ "sycl-base", "debug"   ] },
-    { "name": "x64-windows-sycl-release", "inherits": [ "sycl-base", "release" ] }
+    { "name": "x64-windows-sycl-release", "inherits": [ "sycl-base", "release" ] },
+    { "name": "x64-windows-sycl-debug-f16", "inherits": [ "x64-windows-sycl-debug" ], "cacheVariables": {"GGML_SYCL_F16": "ON"} },
+    { "name": "x64-windows-sycl-release-f16", "inherits": [ "x64-windows-sycl-release" ], "cacheVariables": {"GGML_SYCL_F16": "ON"} }
   ]
 }
